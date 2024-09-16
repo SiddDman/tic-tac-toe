@@ -43,7 +43,8 @@ int getSlot(vector<vector<char>> &board)
         row = slot / 3 - 1;
         col = 2;
     }
-
+    if (slot >= 1 && slot <= 9 && board[row][col] >= '1' && board[row][col] <= '9')
+        return slot;
     if (slot * 1LL < 1 || slot * 1LL > 9)
     {
         cout << "This is an invalid slot, please enter a slot between 1-9: ";
@@ -54,8 +55,6 @@ int getSlot(vector<vector<char>> &board)
         cout << "This is already occupied slot, please enter another slot : ";
         getSlot(board);
     }
-
-    return slot;
 }
 
 void placeMarker(int slot, char marker, vector<vector<char>> &board)
@@ -106,8 +105,6 @@ void twoPlayer(vector<vector<char>> &board)
 {
     cout << "Two Player Mode" << endl
          << endl;
-    cout << "Enter the key corresponding to the number in the board to enter your move" << endl
-         << endl;
 
     char player_1_marker, player_2_marker = 'O';
     cout << "Player 1 choose O or X : ";
@@ -127,6 +124,10 @@ void twoPlayer(vector<vector<char>> &board)
     int player = 1;
     char marker = player_1_marker;
 
+    cout << "Enter the key corresponding to the number in the board to enter your move" << endl
+         << endl;
+
+    cout << "Game Started" << endl;
     for (int i = 0; i < 9; i++)
     {
         cout << "Player " << player << "'s turn" << endl;
@@ -166,18 +167,29 @@ void singlePlayer(vector<vector<char>> &board)
     return;
 }
 
-int main()
+void game()
 {
     int gameMode;
-    cout << "Enter game mode, 1 for single player and 2 for two player" << endl;
+
+    cout << "Select game mode :" << endl;
+    cout << "[1] Single Player vs A.I" << endl;
+    cout << "[2] Multiplayer" << endl;
+    cout << "[3] Exit" << endl;
     cin >> gameMode;
 
     vector<vector<char>> board = createBoard();
     drawBoard(board);
-    if (gameMode == 2)
+    if (gameMode == 1)
+        singlePlayer(board);
+    else if (gameMode == 2)
         twoPlayer(board);
     else
-        singlePlayer(board);
+        return;
+}
+
+int main()
+{
+    game();
 
     return 0;
 }
