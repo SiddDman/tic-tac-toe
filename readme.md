@@ -13,9 +13,8 @@ The game provides clear instructions, a dynamically updated board, and announces
 
 1. [Features of the Game](#features-of-the-game)
 2. [Minimax Algorithm Description](#minimax-algorithm-description)
-3. [Minimax in Tic Tac Toe](#minimax-in-tic-tac-toe)
-4. [Rules of Tic Tac Toe](#rules-of-tic-tac-toe)
-5. [Project Setup](#project-setup)
+3. [Rules of Tic Tac Toe](#rules-of-tic-tac-toe)
+4. [Project Setup](#project-setup)
 
 ## Features of the Game
 
@@ -121,6 +120,10 @@ The depth of the tree is determined by how far the game progresses. Each recursi
      - Option 2: Multiplayer (Player vs Player)
    - Follow the on-screen prompts to place your marker on the board.
 
-## Enjoy the game!
+## OR
+
+Just download the tic-tac-toe.exe file and enjoy the game to directly enjoy the game.
+
+## Enjoy !!!!
 
 ---
