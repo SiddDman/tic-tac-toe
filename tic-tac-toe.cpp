@@ -14,7 +14,7 @@ bool isSlotValid(vector<vector<char>> &board, int row, int col)
 
 vector<vector<char>> createBoard()
 {
-    vector<vector<char>> board(3, vector<char>(3, '0'));
+    vector<vector<char>> board(3, vector<char>(3, ' '));
     int cnt = 1;
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
@@ -38,26 +38,32 @@ void drawBoard(vector<vector<char>> &board)
 
 int getSlot(vector<vector<char>> &board)
 {
-    int slot;
-    cin >> slot;
+    char ip;
 
-    int row = slot / 3, col = slot % 3 - 1;
-    if (slot % 3 == 0)
+    while (true)
     {
-        row = slot / 3 - 1;
-        col = 2;
-    }
-    if (slot >= 1 && slot <= 9 && isSlotValid(board, row, col))
+        cin >> ip;
+        if (ip < '1' || ip > '9')
+        {
+            cout << "This is an invalid slot, please enter a slot between 1-9: " << endl;
+            continue;
+        }
+
+        int slot = ip - '0';
+        int row = slot / 3, col = slot % 3 - 1;
+        if (slot % 3 == 0)
+        {
+            row = slot / 3 - 1;
+            col = 2;
+        }
+
+        if (board[row][col] < '1' || board[row][col] > '9')
+        {
+            cout << "This is already occupied slot, please enter another slot : " << endl;
+            continue;
+        }
+
         return slot;
-    if (slot * 1LL < 1 || slot * 1LL > 9)
-    {
-        cout << "This is an invalid slot, please enter a slot between 1-9: ";
-        getSlot(board);
-    }
-    else if (board[row][col] < '1' || board[row][col] > '9')
-    {
-        cout << "This is already occupied slot, please enter another slot : ";
-        getSlot(board);
     }
 }
 
@@ -96,13 +102,9 @@ bool checkWinner(vector<vector<char>> &board)
 void swapPlayerAndMarker(int &player, char &marker)
 {
     if (player == 1)
-        player = 2;
+        player = 0;
     else
         player = 1;
-    if (marker == 'X')
-        marker = 'O';
-    else
-        marker = 'X';
 }
 
 void twoPlayer(vector<vector<char>> &board)
@@ -166,7 +168,7 @@ int minimax(vector<vector<char>> &board, bool isMaximizing, char &ai_marker, cha
     if (isBoardFull(board))
         return 0;
 
-    int bestScore = isMaximizing ? -1e9 : 1e9;
+    int bestScore = isMaximizing ? -1e9 : 1e9; // AI is maximising the score and human is minimizing
     char currentMarker = isMaximizing ? ai_marker : player_marker;
 
     for (int i = 0; i < 3; i++)
@@ -180,7 +182,7 @@ int minimax(vector<vector<char>> &board, bool isMaximizing, char &ai_marker, cha
 
                 bestScore = isMaximizing ? max(score, bestScore) : min(score, bestScore);
 
-                board[i][j] = backup; // undo the move
+                board[i][j] = backup; // backtrack
             }
     return bestScore;
 }
@@ -230,9 +232,20 @@ void singlePlayer(vector<vector<char>> &board)
     else
         marker = 'X';
 
+    cout << "Select turn order:" << endl;
+    cout << "[1] Player makes the first move" << endl;
+    cout << "[2] Computer makes the first move" << endl;
+    int firstMove;
+    cin >> firstMove;
+
+    if (firstMove == 1)
+        player = 1;
+    else
+        player = 0;
+
     for (int i = 0; i < 9; i++)
     {
-        if (!(i & 1))
+        if (player & 1)
         {
             cout << "Your turn" << endl;
             cout << "Enter the slot you want to place your marker: ";
@@ -241,22 +254,22 @@ void singlePlayer(vector<vector<char>> &board)
         }
         else
         {
-            cout << "Computer's turn (Player " << player << ")" << endl;
+            cout << "Computer's turn" << endl;
             int bestMove = findBestMove(board, ai_marker, marker);
             placeMarker(bestMove, ai_marker, board);
             cout << "Computer placed marker at slot " << bestMove << endl;
         }
-
         drawBoard(board);
         if (checkWinner(board))
         {
-            if (i & 1)
+            if (player & 1)
+                cout << "You win!!!!" << endl;
+            else
                 cout << "Computer wins!!" << endl
                      << "Better Luck Next Time!!";
-            else
-                cout << "You win!!!!" << endl;
             return;
         }
+        player = !player;
     }
     cout << "It's a Tie !!!!" << endl;
 }
@@ -270,6 +283,8 @@ void game()
     cout << "[2] Multiplayer" << endl;
     cout << "[3] Exit" << endl;
     cin >> gameMode;
+    if (gameMode == 3)
+        return;
 
     vector<vector<char>> board = createBoard();
     drawBoard(board);
@@ -278,8 +293,6 @@ void game()
         singlePlayer(board);
     else if (gameMode == 2)
         twoPlayer(board);
-    else
-        return;
 }
 
 int main()
