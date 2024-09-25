@@ -164,7 +164,7 @@ bool isBoardFull(vector<vector<char>> &board)
 int minimax(vector<vector<char>> &board, bool isMaximizing, char &ai_marker, char &player_marker, int depth)
 {
     if (checkWinner(board))
-        return isMaximizing ? -10 : 10;
+        return isMaximizing ? -10 + depth : 10 - depth;
     if (isBoardFull(board))
         return 0;
 
