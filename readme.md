@@ -123,7 +123,7 @@ The depth of the tree is determined by how far the game progresses. Each recursi
 
 <b>OR</b>
 
-Just download the tic-tac-toe.exe file and enjoy the game to directly enjoy the game.
+Just download the `tic-tac-toe.exe` file and enjoy the game to directly enjoy the game.
 
 ## Enjoy !!!!
 
