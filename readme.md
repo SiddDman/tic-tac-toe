@@ -51,22 +51,24 @@ In Tic Tac Toe, the AI uses the Minimax algorithm to simulate all possible moves
 Consider a Tic Tac Toe game where X (the AI) is trying to win:
 
 - **Level 1 (AI's Move)**: X has three possible moves and is trying to find the one that maximizes its chance of winning.
-  
-- **Level 2 (Opponent's Move)**: 
-    - The first move for X leads to an immediate win, so the value of this move is 100 points.
-    - The second and third moves lead to more possibilities where it's O’s turn to play, trying to minimize the score.
+- **Level 2 (Opponent's Move)**:
+
+  - The first move for X leads to an immediate win, so the value of this move is 100 points.
+  - The second and third moves lead to more possibilities where it's O’s turn to play, trying to minimize the score.
 
 - **Level 3 (Minimizing Opponent)**:
-    - O is now trying to minimize the score. O chooses the move that either leads to a win for O or a draw.
-    - The first move for O results in a win for O, which is valued at -100 points.
-    - The second move for O results in a draw, valued at 0 points.
-    - Thus, the parent nodes for these branches will have values of -100 and 0 respectively.
+
+  - O is now trying to minimize the score. O chooses the move that either leads to a win for O or a draw.
+  - The first move for O results in a win for O, which is valued at -100 points.
+  - The second move for O results in a draw, valued at 0 points.
+  - Thus, the parent nodes for these branches will have values of -100 and 0 respectively.
 
 - **Back to Level 1**:
-    - X now has to choose between the following options: 100 (a win), -100 (a loss), and 0 (a draw).
-    - Since X is trying to maximize the score, it will choose the branch with 100 points, ensuring a win.
+  - X now has to choose between the following options: 100 (a win), -100 (a loss), and 0 (a draw).
+  - Since X is trying to maximize the score, it will choose the branch with 100 points, ensuring a win.
 
 ![Tic-Tac-Toe Game Tree](/minimax-tic-tac-toe.jpg)
+
 ### Depth Calculations in Minimax
 
 The depth of the tree is determined by how far the game progresses. Each recursive call to Minimax evaluates a potential future board state.
@@ -85,7 +87,6 @@ The depth of the tree is determined by how far the game progresses. Each recursi
     - If the human wins in 3 moves, the score for the AI is `-10 + 3 = -7`.
     - If the human wins in 5 moves, the score for the AI is `-10 + 5 = -5`.
       This depth-based adjustment ensures that the AI favors quicker victories and longer defenses, making it a more efficient and intelligent opponent.
-
 
 ## Rules of Tic Tac Toe
 
@@ -120,7 +121,7 @@ The depth of the tree is determined by how far the game progresses. Each recursi
      - Option 2: Multiplayer (Player vs Player)
    - Follow the on-screen prompts to place your marker on the board.
 
-## OR
+<b>OR</b>
 
 Just download the tic-tac-toe.exe file and enjoy the game to directly enjoy the game.
 
