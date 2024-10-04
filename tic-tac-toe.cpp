@@ -102,9 +102,14 @@ bool checkWinner(vector<vector<char>> &board)
 void swapPlayerAndMarker(int &player, char &marker)
 {
     if (player == 1)
-        player = 0;
+        player = 2;
     else
         player = 1;
+
+    if (marker == 'X')
+        marker = 'O';
+    else
+        marker = 'X';
 }
 
 void twoPlayer(vector<vector<char>> &board)
@@ -271,6 +276,7 @@ void singlePlayer(vector<vector<char>> &board)
         }
         player = !player;
     }
+
     cout << "It's a Tie !!!!" << endl;
 }
 
@@ -293,6 +299,14 @@ void game()
         singlePlayer(board);
     else if (gameMode == 2)
         twoPlayer(board);
+
+    cout << "\nPress [R] to Play Again or any other key to EXIT the game." << endl;
+    char x;
+    cin >> x;
+    if (x == 'R' || x == 'r')
+        game();
+    else
+        return;
 }
 
 int main()
